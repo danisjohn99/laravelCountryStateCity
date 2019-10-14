@@ -9,7 +9,22 @@
 <div class="container">
     <div class="panel panel-default">
       <div class="panel-heading">Country State City</div>
+
+      <form action=" {!! url('/form-save') !!}" method="POST">
+        @csrf
+
       <div class="panel-body">
+            
+            <div class="form-group">
+                <label for="title">Name:</label>
+                <input type="text" name="name" class="form-control" style="width:350px"  required>
+            </div>
+
+            <div class="form-group">
+                <label for="title">Email:</label>
+                <input type="email" name="email" class="form-control" style="width:350px"  required>
+            </div>
+
             <div class="form-group">
                 <label for="title">Select Country:</label>
                 {!! Form::select('country',$countries,null,['class'=>'form-control','id'=>'country','placeholder' => 'Select Country...','style'=>'width:350px;','required']);!!}
@@ -25,7 +40,19 @@
                 <select name="city" id="city" class="form-control" style="width:350px" required>
                 </select>
             </div>
+
+             <div class="form-group">
+                <label for="title">Password:</label>
+                <input type="password" name="password" class="form-control" style="width:350px"  required>
+            </div>
+
+            <div class="box-footer">
+             <button type="submit" value="Submit">Submit</button>
+            </div>
       </div>
+
+    </form>
+
     </div>
 </div>
 <script type="text/javascript">
