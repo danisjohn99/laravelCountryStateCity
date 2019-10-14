@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 use App\Countries;
 use App\States;
 use App\Cities;
+use App\User;
+
+//Password
+use Hash;
 
 
 class APIController extends Controller
@@ -33,4 +37,26 @@ class APIController extends Controller
         $cities = Cities::where("state_id", $request->state_id)->pluck("name","id");
         return response()->json($cities);
     }
+
+    public function save(Request $request)
+    {
+        try {
+                $user = new User();
+                $user->name = $request->name;
+                $user->email = $request->email;
+                $user->country_id = $request->country;
+                $user->state_id = $request->state;
+                $user->city_id = $request->city;
+                $user->password = Hash::make($request->password);
+                $user->save();
+
+                return "Saved";
+            
+        } catch (Exception $e) {
+            dd($e);
+        }
+    }
+
+
+
 }
