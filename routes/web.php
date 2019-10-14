@@ -23,3 +23,5 @@ Route::get('api/get-city-list','APIController@getCityList');
 
 //store form 
 Route::post('form-save','APIController@save')->name('form-save');
+
+Route::get('form-edit/{id}','APIController@edit')->name('form-edit');

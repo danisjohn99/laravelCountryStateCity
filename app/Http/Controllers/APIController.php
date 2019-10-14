@@ -57,6 +57,15 @@ class APIController extends Controller
         }
     }
 
+    public function edit($id){
+
+        $user = User::findOrfail($id);
+        $password = bcrypt($user->password);
+  
+        $countries = Countries::pluck("name", "id");
+        return view('edit',compact('user','countries', 'password'));
+    }
+
 
 
 }
