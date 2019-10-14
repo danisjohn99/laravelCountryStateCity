@@ -19,3 +19,7 @@ Route::get('/', function () {
 Route::get('api/dependent-dropdown','APIController@index');
 Route::get('api/get-state-list','APIController@getStateList');
 Route::get('api/get-city-list','APIController@getCityList');
+
+
+//store form 
+Route::post('form-save','APIController@save')->name('form-save');
