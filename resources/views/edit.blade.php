@@ -63,27 +63,26 @@ $stateName = App\States::where('id',$user->state_id)->value('name');
 <script type="text/javascript">
 
 
-	//inicial load
+	//inicial load state
 
 
 	var countryID = <?= $user->country_id ?>;  
 	var stateId = <?= $user->state_id ?>;  
-console.log(stateId);
       if(countryID){
           $.ajax({
              type:"GET",
              url:"{{url('api/get-state-list')}}?country_id="+countryID,
              
-             success:function(res){               
+             success:function(res){   
+
                 if(res){
                     $("#state").empty();
                     $("#state").append('<option>Select</option>');
                     $.each(res,function(key,value){
 
+                    var selected = (key == stateId) ? '<?="selected"?>' : '';
 
-                   $("#state").append('<option  value="'+key+'"  selected="'+ (key == stateId ? 'selected' : '') + '" >'+value+'</option>');
-
-                        // $("#state").append("<option value = '"+key"' >'"+value+"'</option>");
+                    $("#state").append('<option  value="'+key+'" '+selected+'>'+value+'</option>');
                     });
                
                 }else{
@@ -94,7 +93,36 @@ console.log(stateId);
       }else{
           $("#state").empty();
           $("#city").empty();
-      }      
+      }   
+
+
+      //inicial load city
+
+
+var cityId = <?= $user->city_id ?>;
+      if(stateId){
+          $.ajax({
+             type:"GET",
+             url:"{{url('api/get-city-list')}}?state_id="+stateId,
+             success:function(res){               
+              if(res){
+                  $("#city").empty();
+                  $.each(res,function(key,value){
+                  	                    var selected = (key == cityId) ? '<?="selected"?>' : '';
+
+                      $("#city").append('<option value="'+key+'" '+selected+'>'+value+'</option>');
+                  });
+             
+              }else{
+                 $("#city").empty();
+              }
+             }
+          });
+      }else{
+          $("#city").empty();
+      }
+
+
 
   //For country
 
